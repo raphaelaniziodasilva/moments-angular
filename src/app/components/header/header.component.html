@@ -1,11 +1,14 @@
-<h2>Header</h2>
 <nav>
-    <ul>
-        <li>
-            <a routerLink="/">Home</a>
-        </li>
-        <li>
-            <a routerLink="/about">Sobre</a>
-        </li>
+    <a class="brand" routerLink="/">
+        <img src="./assets/moments.png" alt="moments"/>
+        <h2>Moments</h2>
+    </a>
+    <ul class="links">
+        <!-- página home -->
+        <li><a routerLink="/">Home</a></li>
+        <!-- página new moment -->
+        <li id="add"><a routerLink="/moment/new">Compartilhar</a></li>
+        <!-- página about-->
+        <li><a routerLink="/about">Sobre</a></li>
     </ul>
 </nav>
