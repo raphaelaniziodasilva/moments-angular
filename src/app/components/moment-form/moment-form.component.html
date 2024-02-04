@@ -1,18 +1,57 @@
 <!-- vamos criar o componente formulário para poder ser usado nas páginas-->
 
-<form>
+<!-- fazendo as validações do Angular
+    (ngSubmit)="submit()" = quando o formulário for enviado vai ativar o metodo submit() que esta no componente moment-form.component.ts
+
+    [formGroup]="momentFrom" = declara um grupo de formulario para que o angular consiga mapear os inputs e disprar as validações,
+    momentFrom = se refere ao nome do formulário que esta no componente moment-form.component.ts
+
+    #FormDir="ngForm"= declara para o angular aonde e o formulário e verificar o estado de validação ou redefinir o formulário
+-->
+
+<form (ngSubmit)="submit()" [formGroup]="momentForm" #FormDir="ngForm" >
     <div class="form-group">
         <label for="title">Título:</label>
-        <input type="text" placeholder="Coloque um título aqui" required>
+
+        <!-- validação do campo title
+            criando atributo formControlName="title" = permite que você associe um campo de entrada HTML a um controle de formulário no componente Angular -->
+        <input
+            type="text"
+            placeholder="Coloque um título aqui"
+            formControlName="title"
+            required
+        >
+
+        <!-- div de validação 
+            a expressão *ngIf="title.invalid && FormDir.submitted" = significa que o bloco de HTML ao qual esta diretiva está vinculada será exibido apenas se o campo "title" for inválido e o formulário tiver sido submetido
+            crie o title no componente moment-form.component.ts
+        -->
+        <div *ngIf="title.invalid && FormDir.submitted" class="validation-error">
+
+            <!-- *ngIf="title.errors?.['required']"= melhorando a validação -->
+            <p *ngIf="title.errors?.['required']"> O título é obrigatório</p>
+        </div>
     </div>
+
     <div class="form-group">
         <label for="description">Descrição:</label>
-        <textarea placeholder="O que aconteceu lá?" required></textarea>
+        <textarea 
+            placeholder="O que aconteceu lá?" 
+            formControlName="description"
+            required
+        ></textarea>
+
+        <div *ngIf="description.invalid && FormDir.submitted" class="validation-error">
+            <p *ngIf="description.errors?.['required']"> A descrição é obrigatório </p>
+        </div>
     </div>
+
     <div class="form-group">
         <label for="image">Adicione a foto que mais marcou:</label>
         <input type="file">
     </div>
+
+    <!-- input do tipo submit que vai ser o botão -->
     <input type="submit" value="{{btnText}}">
 
     <!-- a propriedade btnText que e o botão de enviar ainda não existe crie no arquivo moment-form.component.ts -->

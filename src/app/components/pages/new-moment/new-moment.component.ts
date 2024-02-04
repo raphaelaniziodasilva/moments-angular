@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./new-moment.component.css']
 })
 export class NewMomentComponent {
+  // nome dado ao botão!
   btnText = 'Compartilhar!';
 
 }
