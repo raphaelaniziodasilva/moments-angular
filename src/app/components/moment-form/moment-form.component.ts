@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Moment } from 'src/app/interface/Moment';
 
 @Component({
   selector: 'app-moment-form',
@@ -10,25 +11,28 @@ export class MomentFormComponent {
   // criando a propriedade btnText que e o botão, com a propriedade criada adicione no componente pai aonde está sendo usada new-moment.component.html
   @Input() btnText!: string;
 
-  momentForm!: FormGroup;
+  // permite que o componente pai reaja a eventos gerados pelo componente filho, quando um evento onSubmit é acionado no componente filho, ele pode ser capturado e tratado pelo componente pai.
+  @Output() onSubmit = new EventEmitter<Moment>();
 
-  constructor() {
+  momentForm!: FormGroup; // nome do formulário
 
-  }
+  constructor() {}
 
   // para fazer a validação do title do formuário precisamos criar o title, primeiro precisamos inicializar o formulário usando ngOnInit poque agora vamos inicializar as coisas do angular
   ngOnInit(): void {
 
-    // vamos inicializar o momentForm poque la em cima só esta sendo declarado aqui vamos inicializa-lo
+    // vamos inicializar o momentForm poque la em cima só esta sendo declarado e aqui vamos inicializa-lo
     this.momentForm = new FormGroup({
       // declarando todos os campos que vai ter no formulário, FormControl = esta controlando o input pode ser qualquer um que esta aqui
-      id: new FormControl(''),
+      id: new FormControl(''), // id para fazer a edição e exclusão 
 
       // vamos declarar os validators
       title: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
       image: new FormControl(''),
     });
+
+    // precisamos pegar os atributos que queremos com o metodo get
   }
 
   // pegando o atributo title do momentForm inicilaizado para fazer a validação do campo
@@ -41,11 +45,25 @@ export class MomentFormComponent {
     return this.momentForm.get('description')!;
   }
 
+  // vai ser responsável por jogar a imagem no formulário
+  onFileSelected(event: any) {
+    // pegando o arquivo do input de imagem
+    const file: File = event.target.files[0];
+    // atualizando o valor do campo image no formulário, com os dados contidos na variável file
+    this.momentForm.patchValue({image: file})
+  }
+
   submit() {
     // se o momentForm for invalido ele vai dar um return ele não terminar o submit
     if(this.momentForm.invalid) {
       return;
     }
-    console.log('Enviou formulário');
+    console.log(this.momentForm.value);
+
+    // com o formulário criado e configurado precisamos enviar as informações do formulário para o componente pai
+    // vamos emitir um evento para o componente pai no arquivo new-moment.component.html
+
+    // enviando os dados do formlário para o componente pai no arquivo new-moment.component.ts
+    this.onSubmit.emit(this.momentForm.value);
   }
 }

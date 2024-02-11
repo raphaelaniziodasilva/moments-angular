@@ -3,10 +3,15 @@
 
 <!-- 
     chamando o componente moment form
-    colocando texto no botão: btnText, precisamos criar a propriedade btnText em new-moment.component.ts
+    colocando texto no botão: btnText, precisamos criar a propriedade btnText no componente new-moment.component.ts
+-->
+
+<!-- 
+    implementando evento para receber as informações do formulário que esta vindo componente filho moment-form.component.html
 -->
 <app-moment-form
     [btnText]="btnText"
+    (onSubmit)="createHandler($event)"
 >
 </app-moment-form>
 <!-- 

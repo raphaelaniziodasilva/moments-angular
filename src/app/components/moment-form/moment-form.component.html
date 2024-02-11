@@ -23,7 +23,7 @@
         >
 
         <!-- div de validação 
-            a expressão *ngIf="title.invalid && FormDir.submitted" = significa que o bloco de HTML ao qual esta diretiva está vinculada será exibido apenas se o campo "title" for inválido e o formulário tiver sido submetido
+            a expressão *ngIf="title.invalid && FormDir.submitted" = significa que o bloco de HTML ao qual está vinculada será exibido apenas se o campo "title" for inválido e o formulário tiver sido submetido
             crie o title no componente moment-form.component.ts
         -->
         <div *ngIf="title.invalid && FormDir.submitted" class="validation-error">
@@ -48,7 +48,8 @@
 
     <div class="form-group">
         <label for="image">Adicione a foto que mais marcou:</label>
-        <input type="file">
+        <!-- (change)="onFileSelected($event)"> = para enviar a imagem -->
+        <input type="file" (change)="onFileSelected($event)">
     </div>
 
     <!-- input do tipo submit que vai ser o botão -->
