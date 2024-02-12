@@ -1,8 +1,10 @@
-<!-- adicionando a propriedade message la do service -->
+<!-- *ngIf="messageService.message" = adicionando a propriedade message la do service -->
 <div class="message" *ngIf="messageService.message">
     <div class="message-header">
         <h2>Mensagem do Sistema</h2>
-        <button class="clear">
+
+        <!-- (click)="messageService.clear()" = permite que o usuário possa fechar a menssagem apertando no X-->
+        <button class="clear" (click)="messageService.clear()">
             <!-- adicionando o icone de X no botão, importe e inicialize no component-->
             <fa-icon [icon]="faTimes"></fa-icon>
         </button>

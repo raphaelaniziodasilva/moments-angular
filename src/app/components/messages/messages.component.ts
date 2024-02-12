@@ -8,7 +8,7 @@ import { MessageService } from 'src/app/services/message.service';
   styleUrls: ['./messages.component.css']
 })
 export class MessagesComponent implements OnInit {
-  // inicializando ox icones de faTimes, depois volte para o html do component
+  // inicializando os icones de faTimes, depois volte para o html do component
   faTimes = faTimes;
 
   constructor(public messageService: MessageService) {}
@@ -17,7 +17,5 @@ export class MessagesComponent implements OnInit {
       
   }
 
-  
-
-
+  // crie o metodo de adicionar e limpar a mensagem no service no arquivo message.service.ts
 }
