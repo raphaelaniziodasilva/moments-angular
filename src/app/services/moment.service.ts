@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class MomentService {
-  // configurando o caminho específico para rota da API
+  // configurando o caminho específico para rota da API back-end
   private baseApiUrl = environment.baseApiUrl;
   private apiUrl = `${this.baseApiUrl}api/moments`;
 

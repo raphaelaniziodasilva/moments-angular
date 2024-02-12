@@ -11,7 +11,7 @@ export class MomentFormComponent {
   // criando a propriedade btnText que e o botão, com a propriedade criada adicione no componente pai aonde está sendo usada new-moment.component.html
   @Input() btnText!: string;
 
-  // permite que o componente pai reaja a eventos gerados pelo componente filho, quando um evento onSubmit é acionado no componente filho, ele pode ser capturado e tratado pelo componente pai.
+  // @Output() = permite que o componente pai reaja a eventos gerados pelo componente filho, quando um evento onSubmit é acionado no componente filho, ele pode ser capturado e tratado pelo componente pai.
   @Output() onSubmit = new EventEmitter<Moment>();
 
   momentForm!: FormGroup; // nome do formulário
@@ -63,7 +63,7 @@ export class MomentFormComponent {
     // com o formulário criado e configurado precisamos enviar as informações do formulário para o componente pai
     // vamos emitir um evento para o componente pai no arquivo new-moment.component.html
 
-    // enviando os dados do formlário para o componente pai no arquivo new-moment.component.ts
+    // enviando os dados do formlário para o componente pai no arquivo new-moment.component.ts, para isso precisamos utilizar o decorator @Output() onSubmit 
     this.onSubmit.emit(this.momentForm.value);
   }
 }
