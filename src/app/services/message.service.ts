@@ -9,9 +9,9 @@ export class MessageService {
 
   constructor() { }
 
-  // adicionando uma messagem
+  // adicionando messagem
   add(message: string) {
-    // chamandoa a propriedade message que esta vazia 
+    // chamando a propriedade message que esta vazia 
     this.message = message;
 
     // chamando a função setTimeout. Esta função é usada para agendar a execução de uma função após um determinado intervalo de tempo.
@@ -19,13 +19,15 @@ export class MessageService {
 
       // chamando o metodo de apagar menssagem
       this.clear();
-    }, 4000);
+    }, 4000); // duração de apagar menssagem em 4 segundos
 
-    // adicione o metodo na pagina new moment va para o componente new-moment.component.ts
+    // no arquivo new-moment.component.ts adicione o metodo add(message: string) na pagina new moment e depois no arquivo messages.component.html faça uma verificação para adicionar a propriedade message
   }
 
   // apagando menssagem
   clear() {
     this.message = '';
+
+    // no arquivo messages.component.html utilize o método clear() para permitir que o usuário possa fechar a menssagem apertando no X
   }
 }

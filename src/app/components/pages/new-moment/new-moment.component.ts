@@ -56,8 +56,5 @@ export class NewMomentComponent implements OnInit {
 
     // vamos redirecionar para a pagina principal
     this.router.navigate(['/']);
-
-
   }
-
 }
