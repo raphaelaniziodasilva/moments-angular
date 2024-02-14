@@ -1,6 +1,20 @@
 <div class="home-container">
     <h1>Veja o que estão compartilhando</h1>
 
+    <!-- vamos criar o formulário de busca pelo que o usuário digitar -->
+    <div class="search-container">
+        <form>
+            <!-- icone de busca: lupa -->
+            <fa-icon [icon]="faSearch"></fa-icon>
+            <input 
+                type="text"
+                placeholder="Busque por um momento..."
+                (input)="search($event)"
+            />
+        </form>
+
+    </div>
+
     <div *ngIf="moments.length > 0 else noMoments">
         <div class="moments-container">
             <div class="moment" *ngFor="let moment of moments">

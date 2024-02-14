@@ -10,18 +10,24 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
+  // no arquivo moment.service.ts crie o método para pegar todos os momentos que esta no banco de dados
+
   // para pegar todos os momentos que estão salvos no db
   allMoments: Moment[] = [];
-  // para fazer o filtro dos momentos no html que vai ser exibido depois da busca, vamos filtrar com o que o usuário esta buscando
+  // para fazer o filtro dos momentos no html que vai ser exibido, e depois vamos filtrar com o que o usuário esta buscando
   moments: Moment[] = [];
   // para ter acesso a api de back-end para fazer a busca dos momentos
   baseApiUrl = environment.baseApiUrl
 
-  // no arquivo moment.service.ts crie o método para pegar todos os momentos que esta no banco de dados
+  // definindo o icone de busca
+  faSearch = faSearch;
+  // o que o usuário vai buscar
+  searchTerm: string = '';
 
   constructor(private momentService: MomentService) {}
 
-  // aqui vamos fazer a inicialização dos momentos buscando la do service
+  // vamos fazer a inicialização dos momentos, buscando la do service
   ngOnInit(): void {
     // vamos fazer a recepcão de dados
     this.momentService.getMoments().subscribe((items) => {
@@ -36,5 +42,18 @@ export class HomeComponent implements OnInit {
       this.allMoments = data;
       this.moments = data;
     });
+  }
+
+  // busca pelo que o usuário digitar
+  search(e: Event): void {
+    // pegando o valor que esta sendo exibido pelo input do html, ou seja o valor que está sendo digitado pelo usuário
+    const target = e.target as HTMLInputElement;
+    const value = target.value;
+
+    // os momentos que esta sendo exibido vai receber o filtro todos os momentos filtrados
+    this.moments = this.allMoments.filter((moment) => {
+      // toLowerCase() =  ignorando letras maiúsculas e minúsculas
+      return moment.title.toLowerCase().includes(value);
+    })
   }
 }
