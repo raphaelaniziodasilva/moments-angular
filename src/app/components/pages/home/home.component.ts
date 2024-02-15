@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   allMoments: Moment[] = [];
   // para fazer o filtro dos momentos no html que vai ser exibido, e depois vamos filtrar com o que o usuário esta buscando
   moments: Moment[] = [];
-  // para ter acesso a api de back-end para fazer a busca dos momentos
+  // para ter acesso a api de back-end para fazer a busca dos dados momentos
   baseApiUrl = environment.baseApiUrl
 
   // definindo o icone de busca
