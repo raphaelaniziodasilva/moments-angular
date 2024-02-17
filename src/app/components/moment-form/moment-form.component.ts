@@ -10,6 +10,7 @@ import { Moment } from 'src/app/interface/Moment';
 export class MomentFormComponent {
   // criando a propriedade btnText que e o botão, com a propriedade criada adicione no componente pai aonde está sendo usada new-moment.component.html
   @Input() btnText!: string;
+  @Input() momentData: Moment | null = null;
 
   // @Output() = permite que o componente pai reaja a eventos gerados pelo componente filho, quando um evento onSubmit é acionado no componente filho, ele pode ser capturado e tratado pelo componente pai.
   @Output() onSubmit = new EventEmitter<Moment>();
@@ -24,11 +25,18 @@ export class MomentFormComponent {
     // vamos inicializar o momentForm poque la em cima só esta sendo declarado e aqui vamos inicializa-lo
     this.momentForm = new FormGroup({
       // declarando todos os campos que vai ter no formulário, FormControl = esta controlando o input pode ser qualquer um que esta aqui
-      id: new FormControl(''), // id para fazer a edição e exclusão 
+
+      // quando for editar do momento precisamos fazer uma verificação, se o moment ja foi criado vai me trazer os dados desse moment no formúlario da página de edit!
+      // this.momentData ? this.momentData.id = verificando se o id existe
+      id: new FormControl(this.momentData ? this.momentData.id : ''), // id para fazer a edição e exclusão 
 
       // vamos declarar os validators
-      title: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required),
+      // this.momentData ? this.momentData.title = verificando se o title existe
+      title: new FormControl(this.momentData ? this.momentData.title : '', Validators.required),
+
+      // this.momentData ? this.momentData.description = verificando se a descrição existe
+      description: new FormControl(this.momentData ? this.momentData.description : '', Validators.required),
+
       image: new FormControl(''),
     });
 

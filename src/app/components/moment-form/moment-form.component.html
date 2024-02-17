@@ -10,6 +10,10 @@
 -->
 
 <form (ngSubmit)="submit()" [formGroup]="momentForm" #FormDir="ngForm" >
+    
+    <!-- esse id sera enviado na hora da edição -->
+    <input type="hidden" formControlName="id" />
+
     <div class="form-group">
         <label for="title">Título:</label>
 

@@ -48,5 +48,12 @@ export class MomentService {
     // va para o arquivo moment.component.ts e chame o metodo removeMoment
   }
 
+  // editar momento pelo id no db
+  updateMoment(id: number, formData: FormData): Observable<FormData> {
+    // criando uma nova url para pegar o id
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.put<FormData>(url, formData);
 
+    // va para o arquivo edit-moment.component.ts e chame o metodo editMoment
+  }
 }

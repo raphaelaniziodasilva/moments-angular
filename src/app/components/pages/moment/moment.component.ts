@@ -23,11 +23,11 @@ export class MomentComponent implements OnInit {
   constructor(
     private momentService: MomentService,
     private route: ActivatedRoute,
-    private MessageService: MessageService, 
+    private messageService: MessageService, 
     private router: Router
   ) {}
 
-  // pegando o pelo ID
+  // para pegar um momento especifico precisamos pegar o momento pelo ID
   ngOnInit(): void {
     // pegando o id que está na URL
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -47,7 +47,7 @@ export class MomentComponent implements OnInit {
     await this.momentService.removeMoment(id).subscribe();
 
     // chamando o serviço de mensageria e adicionando a mensagem para o usuário
-    this.MessageService.add('Momento excluído com sucesso!');
+    this.messageService.add('Momento excluído com sucesso!');
 
     // após o momento ser excluido vai redirecionar para a pagina principal a Home
     this.router.navigate(['/']);
