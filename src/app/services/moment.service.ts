@@ -38,4 +38,15 @@ export class MomentService {
 
     // va para o arquivo new-moment.component.ts e chame o createMoment
   }
+
+  // excluindo um momento pelo id no db
+  removeMoment(id: number) {
+    // criando uma nova url para pegar o id
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.delete(url);
+
+    // va para o arquivo moment.component.ts e chame o metodo removeMoment
+  }
+
+
 }

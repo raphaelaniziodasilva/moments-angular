@@ -1,5 +1,6 @@
+import { MessageService } from './../../../services/message.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faEdit, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Moment } from 'src/app/interface/Moment';
 import { MomentService } from 'src/app/services/moment.service';
@@ -21,9 +22,12 @@ export class MomentComponent implements OnInit {
 
   constructor(
     private momentService: MomentService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private MessageService: MessageService, 
+    private router: Router
   ) {}
 
+  // pegando o pelo ID
   ngOnInit(): void {
     // pegando o id que está na URL
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -33,9 +37,20 @@ export class MomentComponent implements OnInit {
     // vamos fazer o carregamento dos dados e atribuir no moment
     this.momentService.getMoment(id)
     .subscribe((item) => (this.moment = item.data))
-
-
   }
 
+  // no arquivo moment.service.ts crie o método para excluir um momento no db
+
+  // excluindo momento pelo id
+  async removeHandler(id: number) {
+    // chamando o metodo removeMomend 
+    await this.momentService.removeMoment(id).subscribe();
+
+    // chamando o serviço de mensageria e adicionando a mensagem para o usuário
+    this.MessageService.add('Momento excluído com sucesso!');
+
+    // após o momento ser excluido vai redirecionar para a pagina principal a Home
+    this.router.navigate(['/']);
+  }
 
 }
